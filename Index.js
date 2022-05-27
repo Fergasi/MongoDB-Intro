@@ -190,6 +190,16 @@ const updatePost = (blogId, title, text, author, category) => {
 
 updatePost(51, 'Get Hard!', 'Join my Triathlon high-performance academy!', 'Corey' ,'Sports')
 
+/* deletePosts(blogIds) should take in an ARRAY of blogId's in the blogIds param. The function should iterate through the array of blogId's and delete all the blog posts with matching id's.
+*/
+const deletePosts = (blogIds) => {
+    for (let id of blogIds){
+        db.blogs50.deleteOne({id: id})
+    }
+}
+
+deletePosts([4,16,21,47])
+
 /* Stretch Goal: 
     * Iterate through the posts collection and generate a list of author names. Create a new collection in your blogs database called users (this collection should be on the same hierarchical level as the posts collection). For every author in the list do the following: 
     * Create and insert a new user object into the users collection with the following fields: 
