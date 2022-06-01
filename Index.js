@@ -243,7 +243,7 @@ const updateUserDB = () => {
             postsVal.push(element._id)
         })
         
-        if (authorName[0] === 'Miss' || authorName[0] === 'Dr.' || authorName[0] === 'Ms.'){
+        if (authorName[0] === 'Miss' || authorName[0] === 'Dr.' || authorName[0] === 'Ms.' || authorName[0] === 'Mrs.'){
             authorName.shift()
         }
          
