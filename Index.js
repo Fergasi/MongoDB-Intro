@@ -309,3 +309,39 @@ const findBlogByKey = (key, value) => {
 }
 
 getUser('Duane.Crist@gmail.com')
+
+
+// Alternative method using MongoDG operations
+// Does not mutate the data, just enriches the entries and displays them to you
+db.users.aggregate([
+    {
+        $lookup:
+        {
+            from: 'posts', //<-- the collection being searched
+            localField: 'posts', //<-- the local field within the DB document 
+            foreignField: '_id', //<-- the foreign field in the DB being matched
+            as: 'enrichedPosts' //<-- Append the matched DB document to the original post as new field 'enrichedPosts'
+        }
+    }
+])
+.match({}) //<-- works as a substitute for find
+
+// How to incorporate into functiom for the Super Stretch solution
+
+const getUser = (email) => {
+    const users = db.users.aggregate([
+        {
+            $lookup:
+            {
+                from: "posts",
+                localField: "posts",
+                foreignField: "_id",
+                as: "matchedPosts"
+            }
+        }
+    ])
+        .match({
+            email
+        }).toArray()
+    return users
+}
